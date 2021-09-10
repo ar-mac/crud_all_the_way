@@ -1,0 +1,99 @@
+{
+  "users": [
+    [
+      {
+        "id": 1,
+        "name": "Neysa Rigardeau",
+        "email": "nrigardeau0@hhs.gov",
+        "gender": "Male",
+        "password": "DeRugTNDe",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 2,
+        "name": "Noll Falkus",
+        "email": "nfalkus1@desdev.cn",
+        "gender": "Female",
+        "password": "3JuARuh9q",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 3,
+        "name": "Cordelia Dymocke",
+        "email": "cdymocke2@nba.com",
+        "gender": "Female",
+        "password": "Z5B1wH42",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 4,
+        "name": "Lorne Wrout",
+        "email": "lwrout3@cbslocal.com",
+        "gender": "Female",
+        "password": "Xq2EX9lOig",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 5,
+        "name": "Wye Blowfield",
+        "email": "wblowfield4@webs.com",
+        "gender": "Male",
+        "password": "s8XX45YHHH",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 6,
+        "name": "Dimitri Trathan",
+        "email": "dtrathan5@wix.com",
+        "gender": "Female",
+        "password": "bVHnRH",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 7,
+        "name": "Clerc Meddings",
+        "email": "cmeddings6@foxnews.com",
+        "gender": "Male",
+        "password": "zt3O32ET",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 8,
+        "name": "Ira Carlett",
+        "email": "icarlett7@stumbleupon.com",
+        "gender": "Male",
+        "password": "JsTsQc",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 9,
+        "name": "Brice Sprulls",
+        "email": "bsprulls8@e-recht24.de",
+        "gender": "Male",
+        "password": "kxEcZ5lokrd0",
+        "commentIds": [],
+        "postIds": []
+      },
+      {
+        "id": 10,
+        "name": "Mirella Grugerr",
+        "email": "mgrugerr9@jimdo.com",
+        "gender": "Male",
+        "password": "7OnjQU",
+        "commentIds": [],
+        "postIds": []
+      }
+    ]
+  ],
+  "postFollowers": [],
+  "posts": [],
+  "comments": []
+}
