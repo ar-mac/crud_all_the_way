@@ -11,3 +11,7 @@ To setup the application (one time only) run:
 
 To start the application run in separate terminal windows:
 `yarn start` and `yarn run serv`
+
+## Tools
+
+Apart from [react-query](https://react-query.tanstack.com) we'll be using [AntDesign](https://ant.design/components/overview/) to quickly create good looking application.
