@@ -1,20 +1,20 @@
 import 'antd/dist/antd.css'
-import { Router, useLocation } from '@reach/router'
-import { Card, Layout } from 'antd'
+import { Router } from '@reach/router'
+import { Layout } from 'antd'
 import { AppHeader } from './AppHeader'
-import { LoginWrapper } from './routes/LoginPage'
 import { useLogin } from './hooks/useLogin'
 import { AppContent } from './AppContent'
+import {
+  Users,
+  User,
+  UserPosts,
+  FeaturedUsers,
+  Posts,
+  Post,
+  FeaturedPosts,
+  LoginWrapper,
+} from './routes'
 
-const DefaultComponent = () => {
-  const { pathname } = useLocation()
-
-  return (
-    <div>
-      <Card title={pathname} style={{ width: 300 }} />
-    </div>
-  )
-}
 function App() {
   const { userId, login, logout } = useLogin()
 
@@ -29,14 +29,14 @@ function App() {
       </Router>
       <AppContent>
         <Router>
-          <DefaultComponent path="/users" />
-          <DefaultComponent path="/users/featured" />
-          <DefaultComponent path="/users/:userId" />
-          <DefaultComponent path="/users/:userId/posts" />
-          <DefaultComponent path="/posts" />
-          <DefaultComponent path="/posts/featured" />
-          <DefaultComponent path="/posts/:postId" />
-          <DefaultComponent path="/" />
+          <Users path="/users" />
+          <FeaturedUsers path="/users/featured" />
+          <User path="/users/:userId" />
+          <UserPosts path="/users/:userId/posts" />
+          <Posts path="/posts" />
+          <FeaturedPosts path="/posts/featured" />
+          <Post path="/posts/:postId" />
+          <Users path="/" />
         </Router>
       </AppContent>
     </Layout>
