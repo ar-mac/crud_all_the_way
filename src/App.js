@@ -13,6 +13,7 @@ import {
   Post,
   FeaturedPosts,
   LoginWrapper,
+  PostCreate,
 } from './routes'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <UserPosts path="/users/:userId/posts" />
           <Posts path="/posts" />
           <FeaturedPosts path="/posts/featured" />
+          <PostCreate path="/posts/create/:userId" />
           <Post path="/posts/:postId" />
           <Users path="/" />
         </Router>

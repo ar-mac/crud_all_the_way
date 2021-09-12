@@ -15,5 +15,11 @@ export const useLogin = () => {
     localStorage.removeItem('loggedUserId')
   }, [])
 
-  return { userId, logout, login }
+  const isLoggedUser = useCallback((userId) => {
+    console.log({ userId, storage: localStorage.getItem('loggedUserId') })
+
+    return parseInt(userId) === parseInt(localStorage.getItem('loggedUserId'))
+  }, [])
+
+  return { userId, logout, login, isLoggedUser }
 }
