@@ -7,6 +7,9 @@ const { Title } = Typography
 const useGetDefaultNavigation = () => {
   const { pathname } = useLocation()
 
+  if (pathname === '/') {
+    return ['/users']
+  }
   if (/\/users\/\d+/.test(pathname)) {
     return ['/users']
   }
@@ -35,9 +38,6 @@ export const AppHeader = ({ logout }) => {
           >
             {logout ? (
               <>
-                <Menu.Item key="/">
-                  <Link to="/">Dashboard</Link>
-                </Menu.Item>
                 <Menu.Item key="/users">
                   <Link to="/users">Users</Link>
                 </Menu.Item>
