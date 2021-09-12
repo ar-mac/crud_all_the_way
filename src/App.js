@@ -1,11 +1,11 @@
-import './App.css'
 import 'antd/dist/antd.css'
-import { Link, Router, useLocation } from '@reach/router'
-import { Card, Layout, Menu } from 'antd'
+import { Router, useLocation } from '@reach/router'
+import { Card, Layout } from 'antd'
+import { AppHeader } from './AppHeader'
 
-const { Content, Header } = Layout
+const { Content } = Layout
 
-const Comp = () => {
+const DefaultComponent = () => {
   const { pathname } = useLocation()
 
   return (
@@ -18,37 +18,21 @@ const Comp = () => {
 function App() {
   return (
     <Layout>
-      <Header>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          <Menu.Item>
-            <Link to="/">Dashboard</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/users">Users</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/users/featured">Featured users</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/posts">Posts</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/posts/featured">Featured Posts</Link>
-          </Menu.Item>
-        </Menu>
-      </Header>
+      <Router>
+        <AppHeader path="/*" />
+      </Router>
       <Content style={{ padding: '0 50px' }}>
         <Layout style={{ padding: '24px 0', backgroundColor: '#fff' }}>
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <Router>
-              <Comp path="/users" />
-              <Comp path="/users/featured" />
-              <Comp path="/users/:userId" />
-              <Comp path="/users/:userId/posts" />
-              <Comp path="/posts" />
-              <Comp path="/posts/featured" />
-              <Comp path="/posts/:postId" />
-              <Comp path="/" />
+              <DefaultComponent path="/users" />
+              <DefaultComponent path="/users/featured" />
+              <DefaultComponent path="/users/:userId" />
+              <DefaultComponent path="/users/:userId/posts" />
+              <DefaultComponent path="/posts" />
+              <DefaultComponent path="/posts/featured" />
+              <DefaultComponent path="/posts/:postId" />
+              <DefaultComponent path="/" />
             </Router>
           </Content>
         </Layout>
