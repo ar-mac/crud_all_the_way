@@ -36,7 +36,7 @@ function App() {
           <UserPosts path="/users/:userId/posts" />
           <Posts path="/posts" />
           <FeaturedPosts path="/posts/featured" />
-          <PostCreate path="/posts/create/:userId" />
+          <PostCreate path="/posts/create" />
           <Post path="/posts/:postId" />
           <Users path="/" />
         </Router>

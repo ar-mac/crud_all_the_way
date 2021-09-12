@@ -29,7 +29,7 @@ export const User = ({ userId }) => {
         </Col>
         {isLoggedUser(userId) && (
           <Col>
-            <Link to={`/posts/create/${userId}`}>Create New Post</Link>
+            <Link to={`/posts/create`}>Create New Post</Link>
           </Col>
         )}
       </Row>
