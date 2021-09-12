@@ -1,34 +1,27 @@
-import { List, Typography } from 'antd'
+import { Col, List, Row, Typography } from 'antd'
 import { Link } from '@reach/router'
 
 export const Users = () => {
-  // user list with pagination functionality
+  // user list
   const { data, isLoading } = {}
-
-  const handlePaginationChange = (page, pageSize) => {
-    // fetch selected page
-  }
 
   return (
     <>
       <Typography.Title level={2}>Users</Typography.Title>
-      <List
-        loading={isLoading}
-        itemLayout="horizontal"
-        pagination={{
-          position: 'bottom',
-          // current: 1,
-          // total: 100,
-          hideOnSinglePage: false,
-          onChange: handlePaginationChange,
-        }}
-        dataSource={data?.users}
-        renderItem={(user) => (
-          <List.Item actions={[<Link to={`/users/${user.id}`}>Show</Link>]}>
-            <div>{user.name}</div>
-          </List.Item>
-        )}
-      />
+      <Row>
+        <Col span={12} offset={6}>
+          <List
+            loading={isLoading}
+            itemLayout="horizontal"
+            dataSource={data?.users}
+            renderItem={(user) => (
+              <List.Item actions={[<Link to={`/users/${user.id}`}>Show</Link>]}>
+                {user.name}
+              </List.Item>
+            )}
+          />
+        </Col>
+      </Row>
     </>
   )
 }
