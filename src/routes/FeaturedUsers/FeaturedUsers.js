@@ -12,9 +12,9 @@ export const FeaturedUsers = () => {
         loading={isLoading}
         itemLayout="horizontal"
         dataSource={data?.users}
-        renderItem={(user) => (
-          <List.Item actions={[<Link to={`/users/${user.id}`}>Show</Link>]}>
-            <div>{user.name}</div>
+        renderItem={(item) => (
+          <List.Item>
+            <Link to={`/users/${item.id}`}>{item.name}</Link>
           </List.Item>
         )}
       />

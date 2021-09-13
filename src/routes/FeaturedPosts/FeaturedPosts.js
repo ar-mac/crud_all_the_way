@@ -12,9 +12,9 @@ export const FeaturedPosts = () => {
         loading={isLoading}
         itemLayout="horizontal"
         dataSource={data?.posts}
-        renderItem={(post) => (
-          <List.Item actions={[<Link to={`/posts/${post.id}`}>Show</Link>]}>
-            <div>{post.name}</div>
+        renderItem={(item) => (
+          <List.Item>
+            <Link to={`/posts/${item.id}`}>{item.title}</Link>
           </List.Item>
         )}
       />

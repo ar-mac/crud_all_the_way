@@ -1,4 +1,4 @@
-import { List, Typography } from 'antd'
+import { List, Space, Tag, Typography } from 'antd'
 import { Link } from '@reach/router'
 
 export const Posts = () => {
@@ -22,10 +22,13 @@ export const Posts = () => {
           hideOnSinglePage: false,
           onChange: handlePaginationChange,
         }}
-        dataSource={data?.users}
-        renderItem={(user) => (
-          <List.Item actions={[<Link to={`/users/${user.id}`}>Show</Link>]}>
-            <div>{user.name}</div>
+        dataSource={data?.posts}
+        renderItem={(item) => (
+          <List.Item>
+            <Space>
+              <Link to={`/posts/${item.id}`}>{item.title}</Link>
+              {item.isFeatured && <Tag color="blue">Featured</Tag>}
+            </Space>
           </List.Item>
         )}
       />

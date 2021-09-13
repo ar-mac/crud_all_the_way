@@ -1,4 +1,4 @@
-import { Col, List, Row, Typography } from 'antd'
+import { Col, List, Row, Space, Tag, Typography } from 'antd'
 import { Link } from '@reach/router'
 
 export const Users = () => {
@@ -14,9 +14,12 @@ export const Users = () => {
             loading={isLoading}
             itemLayout="horizontal"
             dataSource={data?.users}
-            renderItem={(user) => (
-              <List.Item actions={[<Link to={`/users/${user.id}`}>Show</Link>]}>
-                {user.name}
+            renderItem={(item) => (
+              <List.Item>
+                <Space>
+                  <Link to={`/users/${item.id}`}>{item.name}</Link>
+                  {item.isFeatured && <Tag color="blue">Featured</Tag>}
+                </Space>
               </List.Item>
             )}
           />

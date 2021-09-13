@@ -7,7 +7,6 @@ import { AppContent } from './AppContent'
 import {
   Users,
   User,
-  UserPosts,
   FeaturedUsers,
   Posts,
   Post,
@@ -33,7 +32,6 @@ function App() {
           <Users path="/users" />
           <FeaturedUsers path="/users/featured" />
           <User path="/users/:userId" />
-          <UserPosts path="/users/:userId/posts" />
           <Posts path="/posts" />
           <FeaturedPosts path="/posts/featured" />
           <PostCreate path="/posts/create" />
