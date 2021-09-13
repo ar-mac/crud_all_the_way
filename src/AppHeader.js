@@ -14,7 +14,7 @@ const useGetDefaultNavigation = () => {
   if (/\/users\/\d+/.test(pathname)) {
     return ['/users']
   }
-  if (/\/posts\/\d+/.test(pathname)) {
+  if (/\/posts\/\d+/.test(pathname) || '/posts/create' === pathname) {
     return ['/posts']
   }
   return [pathname]
