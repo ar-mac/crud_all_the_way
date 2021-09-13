@@ -9,12 +9,14 @@ export const PostRating = () => {
   const { mutate: editPost } = {}
 
   const likePost = useCallback(() => {
+    editPost()
     //  like post
-  }, [])
+  }, [editPost])
 
   const dislikePost = useCallback(() => {
+    editPost()
     //  dislike post
-  }, [])
+  }, [editPost])
 
   return (
     <Statistic

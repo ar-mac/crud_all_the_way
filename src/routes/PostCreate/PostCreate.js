@@ -10,7 +10,8 @@ export const PostCreate = () => {
 
   const submitForm = useCallback((values) => {
     console.log(`values: `, values)
-  }, [])
+    createPost()
+  }, [createPost])
 
   return (
     <>
