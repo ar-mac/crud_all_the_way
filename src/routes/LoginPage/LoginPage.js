@@ -1,8 +1,9 @@
 import client from '../../api/axios'
 import { useQuery } from 'react-query'
-import { Select, Spin, Layout, Row, Col, Result } from 'antd'
+import { Select, Layout, Row, Col, Result, Typography } from 'antd'
 import { AppHeader } from '../../AppHeader'
 import { AppContent } from '../../AppContent'
+import { LoadingSpinner } from '../../shared/LoadingSpinner'
 
 const { Option } = Select
 
@@ -23,29 +24,42 @@ export const LoginPage = ({ login }) => {
     )
   }
 
+  const handleLogin = (userId) => {
+    login({ userId, userName: data.data.find(({ id }) => id === userId).name })
+  }
+
   if (isLoading) {
-    return (
-      <Row justify="center" align="middle" style={{ height: '100vh' }}>
-        <Spin size="large" tip="Loading..." />
-      </Row>
-    )
+    return <LoadingSpinner />
   }
 
   return (
     <Layout>
       <AppHeader />
       <AppContent>
-        <Row align="middle" justify="center">
+        <Row align="middle" justify="center" style={{ height: '100%' }}>
           <Col>
-            <Select
-              style={{ width: 200 }}
-              onChange={login}
-              placeholder="Login as..."
-            >
-              {data.data.map((user) => (
-                <Option value={user.id}>{user.name}</Option>
-              ))}
-            </Select>
+            <Row>
+              <Typography.Title level={3}>
+                Select user you want to login as:
+              </Typography.Title>
+            </Row>
+            <Row>
+              <Typography.Text type="secondary">
+                Implementing secure login is not in the scope of this workshops
+                ;)
+              </Typography.Text>
+            </Row>
+            <Row>
+              <Select
+                style={{ width: 200 }}
+                onChange={handleLogin}
+                placeholder="Login as..."
+              >
+                {data.data.map((user) => (
+                  <Option value={user.id}>{user.name}</Option>
+                ))}
+              </Select>
+            </Row>
           </Col>
         </Row>
       </AppContent>

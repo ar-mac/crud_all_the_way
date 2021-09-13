@@ -1,5 +1,6 @@
 import { Link, useLocation } from '@reach/router'
-import { Menu, Layout, Button, Col, Row, Typography } from 'antd'
+import { Menu, Layout, Button, Col, Row, Typography, Space } from 'antd'
+import { useLogin } from './hooks/useLogin'
 
 const { Header } = Layout
 const { Title } = Typography
@@ -21,7 +22,7 @@ const useGetDefaultNavigation = () => {
 
 export const AppHeader = ({ logout }) => {
   const selectedKeys = useGetDefaultNavigation()
-
+  const { getLoggedUserName } = useLogin()
   return (
     <Header>
       <Row gutter={[0, 0]} align="middle" justify="space-between">
@@ -57,8 +58,13 @@ export const AppHeader = ({ logout }) => {
           </Menu>
         </Col>
         {logout && (
-          <Col>
-            <Button onClick={logout}>Logout</Button>
+          <Col style={{ display: 'flex', 'align-items': 'center' }}>
+            <Space size="middle">
+              <Typography.Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
+                {getLoggedUserName()}
+              </Typography.Text>
+              <Button onClick={logout}>Logout</Button>
+            </Space>
           </Col>
         )}
       </Row>
