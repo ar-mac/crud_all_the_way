@@ -2,7 +2,7 @@ import { List, Typography } from 'antd'
 import { Link } from '@reach/router'
 
 export const FeaturedPosts = () => {
-  // fetch users filtered by isFeatured = true
+  // fetch posts filtered by isFeatured = true
   const { data, isLoading } = {}
 
   return (
