@@ -26,6 +26,12 @@ Apart from [react-query](https://react-query.tanstack.com) we'll be using [AntDe
 
 [json-server relationships](https://keyholesoftware.com/2020/03/16/mock-restful-server-fast-with-json-server/) how to fetch data for relationships from json-server
 
+## Info
+
+Whenever using `axios` import it from `/src/api/axios.js`
+
+Whenever you need to generate the ID use the function from `/src/helpers/nanoid.js`
+
 ## Tasks
 
 1. In /users Fetch all users
