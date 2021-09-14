@@ -1,9 +1,16 @@
 import { List, Typography } from 'antd'
 import { Link } from '@reach/router'
+import { useGetUserPosts } from '../../api/posts'
 
 export const UserCreatedPosts = ({ userId }) => {
   // fetch posts created by userId
-  const { data, isLoading } = {}
+  const { data, isLoading } = useGetUserPosts({ userId })
+
+  // const { data, isLoading } = useQuery(
+  //   ['userPosts', { userId }],
+  //   ({ queryKey: [_, param] }) => axios.get(`/users/${param.userId}/posts`),
+  //   { select: (data) => ({ posts: data.data }) }
+  // )
 
   return (
     <>
