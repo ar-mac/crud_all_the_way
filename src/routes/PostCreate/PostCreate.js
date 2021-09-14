@@ -1,17 +1,34 @@
 import { Form, Input, Button, Switch, Typography } from 'antd'
 import { useLogin } from '../../hooks/useLogin'
 import { useCallback } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
+import axios from '../../api/axios'
+import { fetchUserPosts } from '../../api/posts'
+import { navigate } from '@reach/router'
 
 export const PostCreate = () => {
   const { userId } = useLogin()
 
+  const queryClient = useQueryClient()
   // create post for the logged user
-  const { mutate: createPost } = {}
+  const { mutate: createPost } = useMutation(
+    (params) => axios.post('/posts', params),
+    {
+      onSuccess: (response) => {
+        console.log(`response: `, response)
+        navigate(`/users/${userId}`)
+        queryClient.prefetchQuery(['userPosts', { userId }], fetchUserPosts)
+      },
+    }
+  )
 
-  const submitForm = useCallback((values) => {
-    console.log(`values: `, values)
-    createPost()
-  }, [createPost])
+  const submitForm = useCallback(
+    (values) => {
+      console.log(`values: `, values)
+      createPost(values)
+    },
+    [createPost]
+  )
 
   return (
     <>
@@ -25,10 +42,10 @@ export const PostCreate = () => {
         initialValues={{
           publish: true,
           featured: false,
-          creatorId: userId,
+          userId: userId,
         }}
       >
-        <Form.Item name="creatorId" hidden>
+        <Form.Item name="userId" hidden>
           <Input />
         </Form.Item>
         <Form.Item

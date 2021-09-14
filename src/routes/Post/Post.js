@@ -2,21 +2,21 @@ import { LoadingSpinner } from '../../shared/LoadingSpinner'
 import { Col, Divider, Row, Tag, Typography } from 'antd'
 import { ObserverStatistic } from './ObserverStatistic'
 import { PostRating } from './PostRating'
+import axios from '../../api/axios'
+import { useQuery } from 'react-query'
 
-export const Post = () => {
+export const Post = ({ postId }) => {
   // fetch data for post
-  const { data: postData, isLoading: isPostLoading } = {}
+  const { data: postData, isLoading: isPostLoading } = useQuery(
+    ['posts', postId],
+    ({ queryKey }) => axios.get(`/posts/${queryKey[1]}`)
+  )
 
   if (isPostLoading) {
     return <LoadingSpinner />
   }
 
-  // temporary
-  const post = postData?.post || {
-    title: 'Example post title',
-    content: 'Example post content',
-  }
-
+  const post = postData?.data
   return (
     <>
       <Row gutter={16}>
@@ -37,7 +37,7 @@ export const Post = () => {
           <ObserverStatistic />
         </Col>
         <Col span={4}>
-          <PostRating />
+          <PostRating postId={postId} />
         </Col>
       </Row>
     </>
