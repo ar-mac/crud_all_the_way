@@ -1,9 +1,13 @@
 import { Col, List, Row, Space, Tag, Typography } from 'antd'
 import { Link } from '@reach/router'
+import { useQuery } from 'react-query'
+import axios from '../../api/axios'
 
 export const Users = () => {
   // user list
-  const { data, isLoading } = {}
+  const { data, isLoading } = useQuery('users', () => axios.get('/users'), {
+    select: (data) => ({ users: data.data }),
+  })
 
   return (
     <>
