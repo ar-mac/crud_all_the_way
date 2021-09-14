@@ -1,12 +1,26 @@
 // resource hooks
 
 import { useQuery } from 'react-query'
-import { fetchUsers } from './requests'
+import { fetchFilteredUsers, fetchUsers } from './requests'
 import { handleSelectors } from '../shared'
 import { getUsers } from './selectors'
 
-export const useGetUsers = ({ selectors = { users: getUsers }, ...options } = {}) => {
+export const useGetUsers = ({
+  selectors = { users: getUsers },
+  ...options
+} = {}) => {
   return useQuery('users', fetchUsers, {
+    select: handleSelectors(selectors),
+    ...options,
+  })
+}
+
+export const useGetFilteredUsers = ({
+  params,
+  selectors = { users: getUsers },
+  ...options
+} = {}) => {
+  return useQuery(['users', params], fetchFilteredUsers, {
     select: handleSelectors(selectors),
     ...options,
   })
