@@ -1,19 +1,24 @@
 import { Col, List, Row, Space, Tag, Typography } from 'antd'
 import { Link } from '@reach/router'
-import { useQuery } from 'react-query'
-import axios from '../../api/axios'
+import { getUsersLength, useGetUsers } from '../../api/users'
+
+const UsersCount = () => {
+  const { data } = useGetUsers({ selectors: { usersCount: getUsersLength } })
+
+  return <div>{data?.usersCount}</div>
+}
 
 export const Users = () => {
   // user list
-  const { data, isLoading } = useQuery('users', () => axios.get('/users'), {
-    select: (data) => ({ users: data.data }),
-  })
+  const { data, isLoading } = useGetUsers()
 
   return (
     <>
       <Typography.Title level={2}>Users</Typography.Title>
       <Row>
         <Col span={12} offset={6}>
+          <UsersCount />
+
           <List
             loading={isLoading}
             itemLayout="horizontal"
