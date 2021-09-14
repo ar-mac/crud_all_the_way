@@ -14,6 +14,10 @@ import {
   LoginWrapper,
   PostCreate,
 } from './routes'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient()
 
 function App() {
   const { userId, login, logout } = useLogin()
@@ -23,23 +27,26 @@ function App() {
   }
 
   return (
-    <Layout>
-      <Router>
-        <AppHeader path="/*" logout={logout} />
-      </Router>
-      <AppContent>
+    <QueryClientProvider client={queryClient}>
+      <Layout>
         <Router>
-          <Users path="/users" />
-          <FeaturedUsers path="/users/featured" />
-          <User path="/users/:userId" />
-          <Posts path="/posts" />
-          <FeaturedPosts path="/posts/featured" />
-          <PostCreate path="/posts/create" />
-          <Post path="/posts/:postId" />
-          <Users path="/" />
+          <AppHeader path="/*" logout={logout} />
         </Router>
-      </AppContent>
-    </Layout>
+        <AppContent>
+          <Router>
+            <Users path="/users" />
+            <FeaturedUsers path="/users/featured" />
+            <User path="/users/:userId" />
+            <Posts path="/posts" />
+            <FeaturedPosts path="/posts/featured" />
+            <PostCreate path="/posts/create" />
+            <Post path="/posts/:postId" />
+            <Users path="/" />
+          </Router>
+        </AppContent>
+      </Layout>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   )
 }
 
