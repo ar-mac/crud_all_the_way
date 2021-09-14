@@ -4,23 +4,27 @@ import { LoadingSpinner } from '../../shared/LoadingSpinner'
 import { useLogin } from '../../hooks/useLogin'
 import { UserCreatedPosts } from './UserCreatedPosts'
 import { UserObservedPosts } from './UserObservedPosts'
+import { useGetUser } from '../../api/users'
 
 export const User = ({ userId }) => {
   const { isLoggedUser } = useLogin()
   // fetch data for userId
-  const { data: userData, isLoading: isUserLoading } = {}
 
-  if (isUserLoading) {
+  const { data, isLoading, isError } = useGetUser({ userId })
+  // const { data, isLoading, isError } = useQuery(
+  //   ['users', userId],
+  //   ({ queryKey }) => axios.get(`/users/${queryKey[1]}`)
+  // )
+
+  if (isLoading) {
     return <LoadingSpinner />
   }
 
-  // temporary
-  const user = userData?.user || {
-    name: 'Miyazaki',
-    gender: 'Male',
-    isFeatured: true,
-    email: 'h.miyazaki@ghibli.com',
+  if (isError) {
+    return <div>Is Error</div>
   }
+
+  const { user } = data
 
   return (
     <>
