@@ -1,43 +1,95 @@
-import { DislikeOutlined, LikeOutlined } from '@ant-design/icons'
+import {
+  DislikeOutlined,
+  LikeOutlined,
+  LikeFilled,
+  DislikeFilled,
+} from '@ant-design/icons'
 import { Statistic } from 'antd'
-import { useCallback } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import axios from '../../api/axios'
+import { useCallback, useState } from 'react'
+import { useQueryClient } from 'react-query'
+import { useEditPost, useGetPostById } from '../../api/posts'
 
 export const PostRating = ({ postId }) => {
-  // fetch data for post
-  const queryClient = useQueryClient()
-  const { data: postData, isLoading: isPostLoading } = useQuery(
-    ['posts', postId],
-    ({ queryKey }) => axios.get(`/posts/${queryKey[1]}`)
-  )
+  // fetch data for post rating
+  const [yourRating, setYourRating] = useState(0)
 
-  const { mutate: editPost } = useMutation(
-    (params) => axios.put(`/posts/${postId}`, params),
-    {
-      onSuccess: () => {
-        queryClient.refetchQueries(['posts', postId])
-      },
-    }
+  const queryClient = useQueryClient()
+  const { data: postData, isLoading: isPostLoading } = useGetPostById({
+    postId,
+  })
+
+  const { mutate: editPost } = useEditPost({
+    onSuccess: () => {
+      queryClient.refetchQueries(['posts', { postId }])
+    },
+  })
+
+  const handleEditPost = useCallback(
+    (diff) => {
+      console.trace()
+      editPost({
+        ...postData.post,
+        rating: postData.post.rating + diff,
+      })
+    },
+    [editPost, postData?.post]
   )
 
   const likePost = useCallback(() => {
-    editPost({ ...postData.data, rating: postData.data.rating + 1 })
+    setYourRating((currentRating) => {
+      if (currentRating === 1) {
+        handleEditPost(-1)
+        return 0
+      }
+
+      if (currentRating === -1) {
+        handleEditPost(2)
+        return 1
+      } else if (currentRating === 0) {
+        handleEditPost(1)
+        return 1
+      }
+    })
     //  like post
-  }, [editPost, postData.data])
+  }, [handleEditPost])
 
   const dislikePost = useCallback(() => {
-    editPost({ ...postData.data, rating: postData.data.rating - 1 })
+    setYourRating((currentRating) => {
+      if (currentRating === -1) {
+        handleEditPost(1)
+        return 0
+      }
+
+      if (currentRating === 1) {
+        handleEditPost(-2)
+        return -1
+      } else if (currentRating === 0) {
+        handleEditPost(-1)
+        return -1
+      }
+    })
     //  dislike post
-  }, [editPost, postData.data])
+  }, [handleEditPost])
 
   return (
     <Statistic
       title="rating"
       loading={isPostLoading}
-      value={postData?.data?.rating}
-      prefix={<LikeOutlined onClick={likePost} />}
-      suffix={<DislikeOutlined onClick={dislikePost} />}
+      value={postData?.post?.rating}
+      prefix={
+        yourRating === 1 ? (
+          <LikeFilled onClick={likePost} />
+        ) : (
+          <LikeOutlined onClick={likePost} />
+        )
+      }
+      suffix={
+        yourRating === -1 ? (
+          <DislikeFilled onClick={dislikePost} />
+        ) : (
+          <DislikeOutlined onClick={dislikePost} />
+        )
+      }
     />
   )
 }
