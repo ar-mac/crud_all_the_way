@@ -4,17 +4,13 @@ import { LoadingSpinner } from '../../shared/LoadingSpinner'
 import { useLogin } from '../../hooks/useLogin'
 import { UserCreatedPosts } from './UserCreatedPosts'
 import { UserObservedPosts } from './UserObservedPosts'
-import { useGetUser } from '../../api/users'
+import { useGetUserById } from '../../api/users'
 
 export const User = ({ userId }) => {
   const { isLoggedUser } = useLogin()
   // fetch data for userId
 
-  const { data, isLoading, isError } = useGetUser({ userId })
-  // const { data, isLoading, isError } = useQuery(
-  //   ['users', userId],
-  //   ({ queryKey }) => axios.get(`/users/${queryKey[1]}`)
-  // )
+  const { data, isLoading, isError } = useGetUserById({ userId })
 
   if (isLoading) {
     return <LoadingSpinner />

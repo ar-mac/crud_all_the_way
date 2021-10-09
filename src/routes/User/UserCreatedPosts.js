@@ -6,12 +6,6 @@ export const UserCreatedPosts = ({ userId }) => {
   // fetch posts created by userId
   const { data, isLoading } = useGetUserPosts({ userId })
 
-  // const { data, isLoading } = useQuery(
-  //   ['userPosts', { userId }],
-  //   ({ queryKey: [_, param] }) => axios.get(`/users/${param.userId}/posts`),
-  //   { select: (data) => ({ posts: data.data }) }
-  // )
-
   return (
     <>
       <Typography.Title level={3}>Created posts</Typography.Title>

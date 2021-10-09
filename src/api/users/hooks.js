@@ -26,7 +26,7 @@ export const useGetFilteredUsers = ({
   })
 }
 
-export const useGetUser = ({
+export const useGetUserById = ({
   userId,
   selectors = { user: getUser },
   ...options
