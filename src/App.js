@@ -6,6 +6,7 @@ import { useLogin } from './hooks/useLogin'
 import { AppContent } from './AppContent'
 import {
   Users,
+  AnotherUsers,
   User,
   FeaturedUsers,
   Posts,
@@ -41,6 +42,7 @@ function App() {
         <AppContent>
           <Router>
             <Users path="/users" />
+            <AnotherUsers path="/another/users" />
             <FeaturedUsers path="/users/featured" />
             <User path="/users/:userId" />
             <Posts path="/posts" />

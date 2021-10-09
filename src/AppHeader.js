@@ -42,8 +42,11 @@ export const AppHeader = ({ logout }) => {
                 <Menu.Item key="/users">
                   <Link to="/users">Users</Link>
                 </Menu.Item>
+                {/*<Menu.Item key="/another/users">*/}
+                {/*  <Link to="/another/users">AU</Link>*/}
+                {/*</Menu.Item>*/}
                 <Menu.Item key="/users/featured">
-                  <Link to="/users/featured">Featured users</Link>
+                  <Link to="/users/featured">Featured Users</Link>
                 </Menu.Item>
                 <Menu.Item key="/posts">
                   <Link to="/posts">Posts</Link>
