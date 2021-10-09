@@ -2,21 +2,19 @@ import { LoadingSpinner } from '../../shared/LoadingSpinner'
 import { Col, Divider, Row, Tag, Typography } from 'antd'
 import { ObserverStatistic } from './ObserverStatistic'
 import { PostRating } from './PostRating'
-import axios from '../../api/axios'
-import { useQuery } from 'react-query'
+import { useGetPostById } from '../../api/posts'
 
 export const Post = ({ postId }) => {
   // fetch data for post
-  const { data: postData, isLoading: isPostLoading } = useQuery(
-    ['posts', postId],
-    ({ queryKey }) => axios.get(`/posts/${queryKey[1]}`)
-  )
+  const { data: postData, isLoading: isPostLoading } = useGetPostById({
+    postId,
+  })
 
   if (isPostLoading) {
     return <LoadingSpinner />
   }
 
-  const post = postData?.data
+  const post = postData?.post
   return (
     <>
       <Row gutter={16}>

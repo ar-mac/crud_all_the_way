@@ -1,9 +1,9 @@
 // resource hooks
 
-import { useQuery } from 'react-query'
-import { fetchUserPosts } from './requests'
+import { useMutation, useQuery } from 'react-query'
+import { editPost, fetchPost, fetchUserPosts } from './requests'
 import { handleSelectors } from '../shared'
-import { getUserPosts } from './selectors'
+import { getUserPosts, getPost } from './selectors'
 
 export const useGetUserPosts = ({
   userId,
@@ -12,6 +12,24 @@ export const useGetUserPosts = ({
 } = {}) => {
   return useQuery(['userPosts', { userId }], fetchUserPosts, {
     select: handleSelectors(selectors),
+    ...options,
+  })
+}
+
+export const useGetPostById = ({
+  postId,
+  selectors = { post: getPost },
+  ...options
+} = {}) => {
+  return useQuery(['posts', { postId }], fetchPost, {
+    select: handleSelectors(selectors),
+    ...options,
+  })
+}
+
+export const useEditPost = (options = {}) => {
+  return useMutation(editPost, {
+    mutationKey: 'editPost',
     ...options,
   })
 }
