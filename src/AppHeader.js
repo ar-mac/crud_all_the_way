@@ -58,7 +58,7 @@ export const AppHeader = ({ logout }) => {
           </Menu>
         </Col>
         {logout && (
-          <Col style={{ display: 'flex', 'align-items': 'center' }}>
+          <Col style={{ display: 'flex', 'alignItems': 'center' }}>
             <Space size="middle">
               <Typography.Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
                 {getLoggedUserName()}
