@@ -40,8 +40,8 @@ export const PostCreate = () => {
         layout="horizontal"
         onFinish={submitForm}
         initialValues={{
-          publish: true,
-          featured: false,
+          isPublished: true,
+          isFeatured: false,
           userId: userId,
         }}
       >
@@ -62,10 +62,10 @@ export const PostCreate = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item label="Featured" valuePropName="checked" name="featured">
+        <Form.Item label="Featured" valuePropName="checked" name="isFeatured">
           <Switch />
         </Form.Item>
-        <Form.Item label="Publish" valuePropName="checked" name="publish">
+        <Form.Item label="Publish" valuePropName="checked" name="isPublished">
           <Switch />
         </Form.Item>
         <Form.Item>

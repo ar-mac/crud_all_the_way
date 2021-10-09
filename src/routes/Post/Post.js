@@ -22,7 +22,8 @@ export const Post = ({ postId }) => {
           <Typography.Title level={2}>{post.title}</Typography.Title>
         </Col>
         <Col flex="1">
-          <Tag color="blue">{post.status || 'Posted'}</Tag>
+          {!post.isPublished && <Tag color="yellow">Draft</Tag>}
+          {post.isFeatured && <Tag color="green">Featured</Tag>}
         </Col>
       </Row>
 
