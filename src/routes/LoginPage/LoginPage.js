@@ -1,8 +1,7 @@
 import client from '../../api/axios'
 import { useQuery } from 'react-query'
 import { Select, Layout, Row, Col, Result, Typography } from 'antd'
-import { AppHeader } from '../../AppHeader'
-import { AppContent } from '../../AppContent'
+import { AppHeader, AppContent } from '../../layout'
 import { LoadingSpinner } from '../../shared/LoadingSpinner'
 
 const { Option } = Select

@@ -1,9 +1,8 @@
 import 'antd/dist/antd.css'
 import { Router } from '@reach/router'
 import { Layout } from 'antd'
-import { AppHeader } from './AppHeader'
+import { AppHeader, AppContent, APIIndicator } from './layout'
 import { useLogin } from './hooks/useLogin'
-import { AppContent } from './AppContent'
 import {
   Users,
   AnotherUsers,
@@ -52,6 +51,7 @@ function App() {
             <Users path="/" />
           </Router>
         </AppContent>
+        <APIIndicator />
       </Layout>
       <ReactQueryDevtools />
     </QueryClientProvider>

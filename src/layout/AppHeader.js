@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@reach/router'
 import { Menu, Layout, Button, Col, Row, Typography, Space } from 'antd'
-import { useLogin } from './hooks/useLogin'
+import { useLogin } from '../hooks/useLogin'
 
 const { Header } = Layout
 const { Title } = Typography
@@ -61,7 +61,7 @@ export const AppHeader = ({ logout }) => {
           </Menu>
         </Col>
         {logout && (
-          <Col style={{ display: 'flex', 'alignItems': 'center' }}>
+          <Col style={{ display: 'flex', alignItems: 'center' }}>
             <Space size="middle">
               <Typography.Text style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
                 {getLoggedUserName()}
