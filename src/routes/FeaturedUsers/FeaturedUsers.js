@@ -12,14 +12,6 @@ export const FeaturedUsers = () => {
     params: { isFeatured, limit },
   })
 
-  // const { data, isLoading } = useQuery(
-  //   ['users', { isFeatured, limit }],
-  //   () => axios.get(`/users?isFeatured=${isFeatured}&_limit=${limit}`),
-  //   {
-  //     select: (data) => ({ users: data.data }),
-  //   }
-  // )
-
   return (
     <>
       <Typography.Title level={2}>Featured Users</Typography.Title>
