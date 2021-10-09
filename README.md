@@ -56,12 +56,21 @@ Whenever you need to generate the ID use the function from `/src/helpers/nanoid.
 2. In /posts/:postId
    1. Add optimistic loading for like/unlike to mitigate slow server response
    2. Add ability to observe/stop observing post depending on the situation
-3. In /users/:userId 
+3. In /users/:userId
    1. Fetch posts observed by the user
 4. In /posts fetch paginated list of posts
+5. Add global notice (APIIndicator)
+   1. It should display info when queries are fetching
+      1. Check if `userPosts` queries are displayed correctly
+   2. It should display info when mutations are running
 
 Tips:
-* Do not add onSuccess in reusable hooks
+* Demonstrate why should not add onSuccess in reusable hooks (useGetUsers)
+* Demonstrate why you should be careful about using multiple times the same query hook (config misalignment AnotherUsersPage)
+* usages of query hooks in sub pages should have `enabled: false and staleTime: Infinite` flag (useGetUsers in AnotherUsers page)
+
+Discuss:
+* What are the use-cases for redux
 
 ## Disclaimer
 
