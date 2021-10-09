@@ -3,6 +3,7 @@ import { Link } from '@reach/router'
 import { getUsersLength, useGetUsers } from '../../api/users'
 import { useEffect } from 'react'
 
+// eslint-disable-next-line no-unused-vars
 const UsersCount = () => {
   const { data } = useGetUsers({ selectors: { usersCount: getUsersLength } })
 
