@@ -1,16 +1,30 @@
 import { InputNumber, List, Space, Spin, Typography } from 'antd'
 import { Link } from '@reach/router'
 import { useGetFilteredUsers } from '../../api/users'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDebounce } from 'react-use'
 
 const isFeatured = true
 
 export const FeaturedUsers = () => {
   const [_limit, _setLimit] = useState(3)
   // fetch users filtered by isFeatured = true and limit to 3
-  const { data, isLoading, isFetching } = useGetFilteredUsers({
+  const { data, isLoading, isFetching, refetch } = useGetFilteredUsers({
     params: { isFeatured, _limit },
+    enabled: false,
+    keepPreviousData: true,
   })
+
+  const [, cancel] = useDebounce(
+    () => refetch(),
+    500,
+    [_limit]
+  )
+
+  useEffect(() => {
+    cancel()
+    refetch()
+  }, [cancel, refetch])
 
   return (
     <>
