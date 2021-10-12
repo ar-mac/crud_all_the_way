@@ -16,12 +16,14 @@ export const useGetUserPosts = ({
   })
 }
 
+export const getPostByIdQueryKey = (postId) => ['posts', { postId }]
+
 export const useGetPostById = ({
   postId,
   selectors = { post: getPost },
   ...options
 } = {}) => {
-  return useQuery(['posts', { postId }], fetchPost, {
+  return useQuery(getPostByIdQueryKey(postId), fetchPost, {
     select: handleSelectors(selectors),
     ...options,
   })

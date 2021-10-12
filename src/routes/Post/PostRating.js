@@ -7,26 +7,45 @@ import {
 import { Statistic } from 'antd'
 import { useCallback, useState } from 'react'
 import { useQueryClient } from 'react-query'
-import { useEditPost, useGetPostById } from '../../api/posts'
+import {
+  getPostByIdQueryKey,
+  useEditPost,
+  useGetPostById,
+} from '../../api/posts'
 
 export const PostRating = ({ postId }) => {
   // fetch data for post rating
   const [yourRating, setYourRating] = useState(0)
 
   const queryClient = useQueryClient()
+  const queryKey = getPostByIdQueryKey(postId)
   const { data: postData, isLoading: isPostLoading } = useGetPostById({
     postId,
   })
 
   const { mutate: editPost } = useEditPost({
-    onSuccess: () => {
-      queryClient.refetchQueries(['posts', { postId }])
+    onMutate: async ({ rating }) => {
+      await queryClient.cancelQueries(queryKey)
+
+      const previousValue = queryClient.getQueryData(queryKey)
+
+      queryClient.setQueryData(queryKey, (oldData) => ({
+        ...oldData,
+        rating,
+      }))
+
+      return previousValue
+    },
+    onError: (error, variables, previousValue) => {
+      queryClient.setQueryData(queryKey, previousValue)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(queryKey)
     },
   })
 
   const handleEditPost = useCallback(
     (diff) => {
-      console.trace()
       editPost({
         ...postData.post,
         rating: postData.post.rating + diff,
