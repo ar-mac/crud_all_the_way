@@ -33,7 +33,7 @@ export const Post = ({ postId }) => {
       <Divider />
       <Row gutter={16}>
         <Col span={4}>
-          <ObserverStatistic />
+          <ObserverStatistic postId={postId} />
         </Col>
         <Col span={4}>
           <PostRating postId={postId} />
