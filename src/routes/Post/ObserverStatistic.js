@@ -2,7 +2,10 @@ import { UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons'
 import { Statistic } from 'antd'
 import { useCallback } from 'react'
 import { useLogin } from '../../hooks/useLogin'
-import { useGetObservationsForPost } from '../../api/observations'
+import {
+  getObservationsCount,
+  useGetObservationsForPost,
+} from '../../api/observations'
 
 export const ObserverStatistic = ({ postId }) => {
   const { userId } = useLogin()
@@ -14,7 +17,10 @@ export const ObserverStatistic = ({ postId }) => {
 
   // fetch number of post observers
   const { data: observingData, isLoading: isObservingLoading } =
-    useGetObservationsForPost({ postId })
+    useGetObservationsForPost({
+      postId,
+      selectors: { observationsLength: getObservationsCount },
+    })
 
   const observePost = useCallback(() => {
     //  observe post
@@ -39,7 +45,7 @@ export const ObserverStatistic = ({ postId }) => {
     <Statistic
       title="# of observers"
       loading={isLoadingCurrentUserObservingData || isObservingLoading}
-      value={observingData?.data.length}
+      value={observingData?.observationsLength}
       prefix={getPrefix()}
     />
   )
