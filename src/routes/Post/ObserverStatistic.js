@@ -3,23 +3,22 @@ import { Statistic } from 'antd'
 import { useCallback } from 'react'
 import { useLogin } from '../../hooks/useLogin'
 import {
+  getIsUserObservingPost,
   getObservationsCount,
   useGetObservationsForPost,
 } from '../../api/observations'
 
 export const ObserverStatistic = ({ postId }) => {
   const { userId } = useLogin()
-  // fetch if current user is observing post
-  const {
-    data: currentUserObservingData,
-    isLoading: isLoadingCurrentUserObservingData,
-  } = { userId }
 
   // fetch number of post observers
   const { data: observingData, isLoading: isObservingLoading } =
     useGetObservationsForPost({
       postId,
-      selectors: { observationsLength: getObservationsCount },
+      selectors: {
+        observationsLength: getObservationsCount,
+        isObservingPost: (data) => getIsUserObservingPost(data, userId),
+      },
     })
 
   const observePost = useCallback(() => {
@@ -31,11 +30,11 @@ export const ObserverStatistic = ({ postId }) => {
   }, [])
 
   const getPrefix = () => {
-    if (isLoadingCurrentUserObservingData) {
+    if (isObservingLoading) {
       return null
     }
 
-    if (currentUserObservingData?.isObserving) {
+    if (observingData?.isObservingPost) {
       return <UserDeleteOutlined onClick={stopObservingPost} />
     }
     return <UserAddOutlined onClick={observePost} />
@@ -44,7 +43,7 @@ export const ObserverStatistic = ({ postId }) => {
   return (
     <Statistic
       title="# of observers"
-      loading={isLoadingCurrentUserObservingData || isObservingLoading}
+      loading={isObservingLoading}
       value={observingData?.observationsLength}
       prefix={getPrefix()}
     />
